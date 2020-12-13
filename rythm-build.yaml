@@ -15,7 +15,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - cd rythm-micro-serv-cdk && build.sh
+      - ./build.sh
   post_build:
     commands:
       - echo Build completed on `date`
