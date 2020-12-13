@@ -7,6 +7,7 @@ phases:
   pre_build:
     commands:
       - echo pre_build.
+      - npm install -g typescript
       - npm install -g aws-cdk
       - aws --version
       - cdk --version
