@@ -1,10 +1,10 @@
 import * as cdk from "@aws-cdk/core";
-import { S3Stack } from "./s3-stack";
+import * as s3 from "@aws-cdk/aws-s3";
 
-export class RythmMicroServStack extends cdk.Stack {
+export class S3Stack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const s3stack = new S3Stack(this, "S3Stack");
+    const bucket = new s3.Bucket(this, "ScratchS3Bucket");
   }
 }
