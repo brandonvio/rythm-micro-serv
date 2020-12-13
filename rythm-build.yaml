@@ -10,11 +10,12 @@ phases:
       - npm install -g aws-cdk
       - aws --version
       - cdk --version
+      - docker --version
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker --version
+      - cd rythm-micro-serv-cdk && build.sh
   post_build:
     commands:
       - echo Build completed on `date`
