@@ -1,9 +1,6 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      docker: 19
   pre_build:
     commands:
       - echo pre_build.
@@ -14,8 +11,8 @@ phases:
       - docker --version
   build:
     commands:
-      - cd rythm-micro-serv-cdk
       #!/bin/bash
+      - cd rythm-price-micro-serv
       - echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
       - echo "~~ begin docker build"
       - echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -28,7 +25,7 @@ phases:
       - echo "~~ end docker build"
       - echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
       - cd ..
-      - cd rythm-price-micro-serv
+      - cd rythm-micro-serv-cdk
       - echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
       - echo "~~ begin cdk deploy"
       - echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
