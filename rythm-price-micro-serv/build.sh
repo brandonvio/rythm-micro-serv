@@ -7,7 +7,7 @@ aws ecr get-login-password --region us-west-2 --profile scratch-account-01 | doc
 docker build -t rythm-price-repository .
 docker tag rythm-price-repository:latest 778477161868.dkr.ecr.us-west-2.amazonaws.com/rythm-price-repository:latest
 docker push 778477161868.dkr.ecr.us-west-2.amazonaws.com/rythm-price-repository:latest
-docker run --rm -it -p 8000:8000 rythm-price-repository:latest .
+# docker run --rm -it -p 8000:8000 rythm-price-repository:latest .
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo "~~ end docker build"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"

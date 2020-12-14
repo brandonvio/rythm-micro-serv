@@ -7,3 +7,4 @@ python-dateutil
 termcolor
 boto3
 botostubs
+kafka-python
