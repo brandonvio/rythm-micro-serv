@@ -3,7 +3,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo pre_build.
+      - echo pre_build @1.
       - npm install -g typescript
       - npm install -g aws-cdk
       - aws --version
@@ -11,7 +11,6 @@ phases:
       - docker --version
   build:
     commands:
-      #!/bin/bash
       - cd rythm-price-micro-serv
       - echo ~~ begin docker build
       - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 778477161868.dkr.ecr.us-west-2.amazonaws.com
