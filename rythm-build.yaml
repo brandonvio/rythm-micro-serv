@@ -14,9 +14,14 @@ phases:
       - docker --version
   build:
     commands:
-      - echo Build started on `date`
-      - echo Building the Docker image...
+      - cd rythm-micro-serv-cdk
       - ./build.sh
+      - cd ..
+      - cd rythm-price-micro-serv
+      - npm install
+      - npm run build
+      - cdk synth "*"
+      - cdk deploy "*"
   post_build:
     commands:
       - echo Build completed on `date`
