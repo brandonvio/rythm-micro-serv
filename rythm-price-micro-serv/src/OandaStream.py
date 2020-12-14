@@ -1,13 +1,14 @@
 import json
 import requests
 from src.Constants import env
-from src.Environment import get_env
+from src.Environment import get_env, get_secret
 
 
 class OandaStream:
     def stream(self, callback, instruments=None):
         accountID = get_env(env.OANDA_DEFAULT_ACCOUNT)
-        token = get_env(env.OANDA_TOKEN)
+        # token = get_env(env.OANDA_TOKEN)
+        token = get_secret(env.OANDA_TOKEN)
         headers = {"Authorization": f"Bearer {token}"}
         if instruments is None:
             instruments = ["EUR_USD", "USD_JPY", "AUD_USD",

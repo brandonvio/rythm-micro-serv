@@ -5,3 +5,5 @@ pyyaml
 pytz
 python-dateutil
 termcolor
+boto3
+botostubs
