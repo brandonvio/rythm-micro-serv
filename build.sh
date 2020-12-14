@@ -1,6 +1,6 @@
-#
+#!/bin/bash
 cd rythm-price-micro-serv
-docker build -t rythm/rythem-price-micro-serv .
+./build.sh
 
 cd ..
 
