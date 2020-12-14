@@ -2,6 +2,7 @@ import * as cdk from "@aws-cdk/core";
 import * as ec2 from "@aws-cdk/aws-ec2";
 import * as ecs from "@aws-cdk/aws-ecs";
 import * as ecr from "@aws-cdk/aws-ecr";
+import * as iam from "@aws-cdk/aws-iam";
 import * as ecs_patterns from "@aws-cdk/aws-ecs-patterns";
 
 export class FargateStack extends cdk.Stack {
@@ -21,26 +22,41 @@ export class FargateStack extends cdk.Stack {
       clusterName: "RythmCluster",
     });
 
-    // const taskDefinition = new ecs.TaskDefinition(this, "PriceTaskDef", {
-    //   memoryMiB: "512",
-    //   cpu: "256",
-    //   networkMode: ecs.NetworkMode.AWS_VPC,
-    //   compatibility: ecs.Compatibility.EC2_AND_FARGATE,
-    // });
+    const priceTaskRole = new iam.Role(this, "PriceTaskRole", {
+      assumedBy: new iam.ServicePrincipal("ecs-tasks.amazonaws.com"),
+      roleName: "PriceTaskRole",
+      managedPolicies: [
+        iam.ManagedPolicy.fromManagedPolicyArn(
+          this,
+          "SecretsManager",
+          "arn:aws:iam::aws:policy/SecretsManagerReadWrite"
+        ),
+      ],
+    });
 
-    // taskDefinition.addContainer("PriceContainer", {
-    //   image: ecs.ContainerImage.fromEcrRepository(repository),
-    //   memoryLimitMiB: 1024,
-    //   environment: {
-    //     // clear text, not for sensitive data
-    //     STAGE: "prod",
-    //   },
-    // });
+    const taskDefinition = new ecs.TaskDefinition(this, "PriceTaskDef", {
+      memoryMiB: "512",
+      cpu: "256",
+      networkMode: ecs.NetworkMode.AWS_VPC,
+      compatibility: ecs.Compatibility.EC2_AND_FARGATE,
+      taskRole: priceTaskRole,
+    });
 
-    // const service = new ecs.FargateService(this, "Service", {
-    //   cluster,
-    //   taskDefinition,
-    //   desiredCount: 5,
-    // });
+    taskDefinition.addContainer("PriceContainer", {
+      image: ecs.ContainerImage.fromEcrRepository(repository, "latest"),
+      memoryLimitMiB: 512,
+      logging: new ecs.AwsLogDriver({ streamPrefix: "EventDemo" }),
+      environment: {
+        // clear text, not for sensitive data
+        STAGE: "prod",
+      },
+    });
+
+    const service = new ecs.FargateService(this, "PriceService", {
+      serviceName: "PriceService",
+      cluster,
+      taskDefinition,
+      desiredCount: 1,
+    });
   }
 }

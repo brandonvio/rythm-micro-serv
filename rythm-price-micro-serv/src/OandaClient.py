@@ -4,7 +4,7 @@ import v20
 import requests
 from src._time import _time
 from src.Types import Order
-from src.Environment import get_env
+from src.Environment import get_env, get_secret
 from src.Constants import env
 from src.ColorPrint import *
 from dotenv import load_dotenv
@@ -53,7 +53,7 @@ class OandaClient:
 
     @staticmethod
     def get_dependencies():
-        access_token = get_env(env.OANDA_TOKEN)
+        access_token = get_secret(env.OANDA_TOKEN)
         oanda_trade_domain = get_env(env.OANDA_TRADE_DOMAIN)
         api = v20.Context(oanda_trade_domain, 443, token=access_token)
         account_id = get_env(env.OANDA_DEFAULT_ACCOUNT)
