@@ -16,7 +16,7 @@ phases:
       - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 778477161868.dkr.ecr.us-west-2.amazonaws.com
       - docker build -t rythm-price-micro-serv-repo .
       - docker tag rythm-price-micro-serv-repo:latest 778477161868.dkr.ecr.us-west-2.amazonaws.com/rythm-price-micro-serv-repo:latest
-      - docker push 778477161868.dkr.ecr.us-west-2.amazonaws.com/rythm-price-micro-serv-repo:latest
+      # - docker push 778477161868.dkr.ecr.us-west-2.amazonaws.com/rythm-price-micro-serv-repo:latest
       # Run the cdk.
       - cd ..
       - cd rythm-price-micro-serv-cdk
@@ -27,7 +27,7 @@ phases:
       - cd ..
       # Update the service.
       - cd rythm-price-micro-serv
-      - ./update_service.sh
+      # - ./update_service.sh
   post_build:
     commands:
       - echo post_build
