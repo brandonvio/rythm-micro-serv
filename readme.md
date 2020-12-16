@@ -8,4 +8,4 @@ The "rythm-price-micro-serv" is the Python application that consumes a HTTP pric
 ### rythm-price-micro-serv-cdk
 The "rythm-price-micro-serv-cdk" project is the CDK application that provisions the infrastructure for the application.
 
-![Architecture](https://raw.githubusercontent.com/brandonvio/trackerp/master/docs/arch.png)
+![Architecture](https://github.com/brandonvio/rythm-micro-serv/blob/main/docs/images/arch-overview.png?raw=true)
