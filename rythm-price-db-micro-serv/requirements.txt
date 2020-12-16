@@ -8,4 +8,3 @@ termcolor
 boto3
 botostubs
 kafka-python
-confluent-kafka

@@ -13,8 +13,5 @@ def get_env(name):
 
 def get_secret(secretId):
     val = client.get_secret_value(SecretId=secretId)
-    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    print("Getting secret for secretid: " + secretId)
-    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    print(val["SecretString"])
+    print("// Getting secret for secretid: " + secretId)
     return val["SecretString"]
