@@ -1,6 +1,6 @@
 #bin/bash
 ecs_cluster=RythmCluster
-ecs_service=PriceService
+ecs_service=rythm-price-service
 aws_profile=scratch-account-01
 
 # aws ecs update-service --desired-count 0 --cluster $ecs_cluster --service $ecs_service --profile $aws_profile
