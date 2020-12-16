@@ -9,3 +9,7 @@ The "rythm-price-micro-serv" is the Python application that consumes a HTTP pric
 The "rythm-price-micro-serv-cdk" project is the CDK application that provisions the infrastructure for the application.
 
 ![Architecture](https://github.com/brandonvio/rythm-micro-serv/blob/main/docs/images/arch-overview.png?raw=true)
+
+![Kafka Topic](https://github.com/brandonvio/rythm-micro-serv/blob/main/docs/images/kafka-topic.png?raw=true)
+
+![Kafka Consumer](https://github.com/brandonvio/rythm-micro-serv/blob/main/docs/images/consumer-py.png?raw=true)
