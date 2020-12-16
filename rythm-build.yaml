@@ -11,22 +11,23 @@ phases:
       - docker --version
   build:
     commands:
+      # Build docker image.
       - cd rythm-price-micro-serv
-      - echo ~~ begin docker build
       - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 778477161868.dkr.ecr.us-west-2.amazonaws.com
       - docker build -t rythm-price-repository .
       - docker tag rythm-price-repository:latest 778477161868.dkr.ecr.us-west-2.amazonaws.com/rythm-price-repository:latest
       - docker push 778477161868.dkr.ecr.us-west-2.amazonaws.com/rythm-price-repository:latest
-      -  # docker run --rm -it -p 8000:8000 rythm/rythem-price-micro-serv .
-      - echo ~~ end docker build
+      # Run the cdk.
       - cd ..
       - cd rythm-price-micro-serv-cdk
-      - echo ~~ begin cdk deploy
       - npm install
       - npm run build
       - cdk synth "*"
       - cdk deploy "*"
-      - echo ~~ end cdk deploy
+      - cd ..
+      # Update the service.
+      - cd rythm-price-micro-serv
+      - ./update_service.sh
   post_build:
     commands:
       - echo post_build
