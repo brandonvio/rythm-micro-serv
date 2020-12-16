@@ -20,7 +20,7 @@ phases:
       -  # docker run --rm -it -p 8000:8000 rythm/rythem-price-micro-serv .
       - echo ~~ end docker build
       - cd ..
-      - cd rythm-micro-serv-cdk
+      - cd rythm-price-micro-serv-cdk
       - echo ~~ begin cdk deploy
       - npm install
       - npm run build

@@ -1,10 +1,9 @@
 FROM python:3.7-slim
 
-WORKDIR /usr/src/app
+WORKDIR /usr/oanda-stream
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY ./src/ ./src
 COPY ./app.py .
-COPY ./server.py .
 COPY .env .
 ENTRYPOINT ["python", "app.py"]

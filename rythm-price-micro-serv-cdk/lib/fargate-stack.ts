@@ -45,7 +45,7 @@ export class FargateStack extends cdk.Stack {
     taskDefinition.addContainer("PriceContainer", {
       image: ecs.ContainerImage.fromEcrRepository(repository, "latest"),
       memoryLimitMiB: 512,
-      logging: new ecs.AwsLogDriver({ streamPrefix: "EventDemo" }),
+      logging: new ecs.AwsLogDriver({ streamPrefix: "PriceService" }),
       environment: {
         // clear text, not for sensitive data
         STAGE: "prod",

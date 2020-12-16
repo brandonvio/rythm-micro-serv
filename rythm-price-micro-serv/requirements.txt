@@ -1,11 +1,5 @@
 v20
 python-dotenv
-Flask==1.1.1
-pyyaml
-pytz
-python-dateutil
-termcolor
 boto3
 botostubs
 kafka-python
-confluent-kafka
