@@ -10,7 +10,7 @@ export class FargateStack extends cdk.Stack {
     super(scope, id, props);
 
     const repository = new ecr.Repository(this, "RythmRepository", {
-      repositoryName: "rythm-price-repository",
+      repositoryName: "rythm-price-micro-serv-repo",
     });
 
     const vpc = ec2.Vpc.fromLookup(this, "vpc", {
