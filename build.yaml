@@ -27,7 +27,7 @@ phases:
       - cd ..
       # Update the service.
       - cd rythm-price-micro-serv
-      # - ./update_service.sh
+      - ./update_service.sh
   post_build:
     commands:
       - echo post_build
