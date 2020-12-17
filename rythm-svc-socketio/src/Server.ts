@@ -3,7 +3,7 @@ import { createServer } from "http";
 import { Server, Socket } from "socket.io";
 import { EnvUtil } from "./EnvUtil";
 
-console.log("// 8:42");
+console.log("// 11:33");
 
 // Config socketio server.
 const httpServer = createServer();

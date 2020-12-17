@@ -5,7 +5,7 @@ import * as RythmSvcCdk from "../lib/_rythm-svc-cdk-stack";
 test("Empty Stack", () => {
   const app = new cdk.App();
   // WHEN
-  const stack = new RythmSvcCdk.RythmSvcCdkStack(app, "MyTestStack");
+  const stack = new RythmSvcCdk.RythmSvcCdkStack(app, "MyTestStack", {});
   // THEN
   expectCDK(stack).to(
     matchTemplate(

@@ -6,7 +6,6 @@ aws ecr get-login-password --region us-west-2 | docker login --username AWS --pa
 docker build -t rythm-svc-price .
 docker tag rythm-svc-price:latest 778477161868.dkr.ecr.us-west-2.amazonaws.com/rythm-svc-price:latest
 docker push 778477161868.dkr.ecr.us-west-2.amazonaws.com/rythm-svc-price:latest
-# docker run --rm -it -p 8000:8000 rythm-price-micro-serv-repo:latest .
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo "~~ end docker build"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"

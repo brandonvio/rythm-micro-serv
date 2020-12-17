@@ -2,6 +2,7 @@ import * as cdk from "@aws-cdk/core";
 import { EcrStack } from "./ecr-stack";
 import { EcsStack } from "./ecs-stack";
 import { PriceSvcStack } from "./price-svc-stack";
+import { SocketioSvcStack } from "./socketio-svc-stack";
 
 export class RythmSvcCdkStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props: cdk.StackProps) {
@@ -20,6 +21,12 @@ export class RythmSvcCdkStack extends cdk.Stack {
 
     const priceSvcStack = new PriceSvcStack(this, "PriceSvcStack", {
       stackName: "rythm-price-svc-stack",
+      cluster: ecsStack.cluster,
+      env: props.env,
+    });
+
+    const socketioSvcStack = new SocketioSvcStack(this, "SocketioSvcStack", {
+      stackName: "rythm-socketio-svc-stack",
       cluster: ecsStack.cluster,
       env: props.env,
     });
