@@ -1,7 +1,6 @@
 #bin/bash
-ecs_cluster=RythmCluster
-ecs_service=rythm-price-service
-aws_profile=scratch-account-01
+ecs_cluster=rythm-cluster
+ecs_service=rythm-socketio-service
 
 # aws ecs update-service --desired-count 0 --cluster $ecs_cluster --service $ecs_service --profile $aws_profile
 # aws ecs wait services-stable --cluster $ecs_cluster --services $ecs_service --profile $aws_profile

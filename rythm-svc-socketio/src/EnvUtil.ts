@@ -1,19 +1,7 @@
 import { SecretsManager } from "@aws-sdk/client-secrets-manager";
 require("dotenv").config();
 
-const sm = new SecretsManager({
-  credentials: {
-    accessKeyId: "AKIA3KQG2ZWGFDI7CUVP",
-    secretAccessKey: "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",
-  },
-  region: "us-west-2",
-});
-
-// credentials: {
-//   accessKeyId: "AKIA3KQG2ZWGFDI7CUVP",
-//   secretAccessKey: "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",
-// },
-// region: "us-west-2",
+const sm = new SecretsManager({});
 
 export class EnvUtil {
   public static async getSecret(secretId): Promise<string> {
