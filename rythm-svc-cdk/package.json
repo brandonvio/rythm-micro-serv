@@ -1,8 +1,8 @@
 {
-  "name": "rythm-micro-serv",
+  "name": "rythm-svc-cdk",
   "version": "0.1.0",
   "bin": {
-    "rythm-micro-serv": "bin/rythm-micro-serv.js"
+    "rythm-svc-cdk": "bin/rythm-svc-cdk.js"
   },
   "scripts": {
     "build": "tsc",

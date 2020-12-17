@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import "source-map-support/register";
 import * as cdk from "@aws-cdk/core";
-import { RythmMicroServStack } from "../lib/_rythm-micro-serv-stack";
+import { RythmSvcCdkStack } from "../lib/_rythm-svc-cdk-stack";
 
 const app = new cdk.App();
-new RythmMicroServStack(app, "RythmMicroServStack", {
+new RythmSvcCdkStack(app, "RythmSvcCdkStack", {
   env: {
     account: "778477161868",
     region: "us-west-2",
