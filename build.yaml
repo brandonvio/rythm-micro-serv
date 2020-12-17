@@ -23,7 +23,7 @@ phases:
       - npm install
       - npm run build
       - cdk synth "*"
-      - cdk deploy "*"
+      - cdk deploy "*" --require-approval=never
       - cd ..
       # Update the service.
       - cd rythm-price-micro-serv
