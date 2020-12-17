@@ -8,19 +8,27 @@ export class FargateStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const repository = new ecr.Repository(this, "RythmRepository", {
+    // Create repositories in ECR.
+    const priceServRepository = new ecr.Repository(this, "PriceServRepository", {
       repositoryName: "rythm-price-micro-serv-repo",
     });
 
+    const socketIoServRepository = new ecr.Repository(this, "SocketIoServRepository", {
+      repositoryName: "rythm-socketio-serv-repo",
+    });
+
+    // Get the VPC already created in different stack.
     const vpc = ec2.Vpc.fromLookup(this, "vpc", {
       vpcId: "vpc-0f71af096d6ba9b0d",
     });
 
+    // Create the ECS cluster.
     const cluster = new ecs.Cluster(this, "RythmCluster", {
       vpc: vpc,
       clusterName: "RythmCluster",
     });
 
+    // Create the role to run Tasks.
     const priceTaskRole = new iam.Role(this, "PriceTaskRole", {
       assumedBy: new iam.ServicePrincipal("ecs-tasks.amazonaws.com"),
       roleName: "rythm-price-task-role",
@@ -33,6 +41,7 @@ export class FargateStack extends cdk.Stack {
       ],
     });
 
+    // Price Service Task.
     const taskDefinition = new ecs.TaskDefinition(this, "PriceTaskDef", {
       memoryMiB: "512",
       cpu: "256",
@@ -42,7 +51,7 @@ export class FargateStack extends cdk.Stack {
     });
 
     taskDefinition.addContainer("PriceContainer", {
-      image: ecs.ContainerImage.fromEcrRepository(repository, "latest"),
+      image: ecs.ContainerImage.fromEcrRepository(priceServRepository, "latest"),
       memoryLimitMiB: 512,
       logging: new ecs.AwsLogDriver({ streamPrefix: "PriceService" }),
       environment: {
