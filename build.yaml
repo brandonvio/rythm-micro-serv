@@ -12,17 +12,21 @@ phases:
       - docker --version
   build:
     commands:
-      # Create repos in ECR.
+      # Login to ECR.
+      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 778477161868.dkr.ecr.us-west-2.amazonaws.com
+
+      # Config CDK.
       - cd rythm-svc-cdk
       - npm install
       - cdk list
       - cdk synth --all
+
+      # Deploy repos.
       - cdk deploy "RythmSvcCdkStackEcrStack8BB0E4EE"
 
       # Build rythm-svc-price docker image and push.
       - cd ..
       - cd rythm-svc-price
-      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 778477161868.dkr.ecr.us-west-2.amazonaws.com
       - docker build -t rythm-svc-price .
       - docker tag rythm-svc-price:latest 778477161868.dkr.ecr.us-west-2.amazonaws.com/rythm-svc-price:latest
       - docker push 778477161868.dkr.ecr.us-west-2.amazonaws.com/rythm-svc-price:latest
