@@ -19,8 +19,8 @@ phases:
       - cdk list
       - cdk deploy "RythmSvcCdkStackEcrStack8BB0E4EE"
 
-      # - cd ..
       # Build docker image.
+      - cd ..
       - cd rythm-svc-price
       - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 778477161868.dkr.ecr.us-west-2.amazonaws.com
       - docker build -t rythm-svc-price .
