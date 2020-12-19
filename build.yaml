@@ -22,7 +22,7 @@ phases:
       - cdk synth --all
 
       # Deploy repos.
-      - cdk deploy "RythmSvcCdkStackEcrStack8BB0E4EE"
+      - cdk deploy "RythmSvcCdkStackEcrStack8BB0E4EE" --require-approval=never
 
       # Build rythm-svc-price docker image and push.
       - cd ..
@@ -37,17 +37,16 @@ phases:
       - docker build -t rythm-svc-socketio .
       - docker tag rythm-svc-socketio:latest 778477161868.dkr.ecr.us-west-2.amazonaws.com/rythm-svc-socketio:latest
       - docker push 778477161868.dkr.ecr.us-west-2.amazonaws.com/rythm-svc-socketio:latest
-      # # Run the cdk.
-      # - cd ..
-      # - cd rythm-price-micro-serv-cdk
-      # - npm install
-      # - npm run build
-      # - cdk synth "*"
-      # - cdk deploy "*" --require-approval=never
-      # - cd ..
-      # # Update the service.
+
+      # Run the cdk.
+      - cd ..
+      - cd rythm-svc-cdk
+      - cdk deploy "RythmSvcCdkStackPriceSvcStackC85535E7" --require-approval=never
+      - cdk deploy "RythmSvcCdkStackSocketioSvcStackEC817421" --require-approval=never
+
+      # Update the service.
       # - cd rythm-price-micro-serv
-      # # - ./update_service.sh
+      # - ./update_service.sh
   post_build:
     commands:
       - echo post_build
