@@ -16,6 +16,7 @@ phases:
       - npm install -g typescript
       - cd rythm-svc-cdk
       # - cdk deploy "RythmSvcCdkStackEcrStack8BB0E4EE"
+      - npm install
       - cdk list
       # - cd ..
       # Build docker image.
