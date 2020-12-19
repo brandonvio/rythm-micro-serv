@@ -11,10 +11,12 @@ export class EcrStack extends cdk.Stack {
     // Create repositories in ECR.
     const priceSvcRepo = new ecr.Repository(this, "priceSvcRepo", {
       repositoryName: "rythm-svc-price",
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
 
     const socketioSvcRepo = new ecr.Repository(this, "socketioSvcRepo", {
       repositoryName: "rythm-svc-socketio",
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
   }
 }
