@@ -16,7 +16,7 @@ phases:
       - cd rythm-svc-cdk
       - npm install
       - cdk list
-      - cdk synth -all
+      - cdk synth --all
       - cdk deploy "RythmSvcCdkStackEcrStack8BB0E4EE"
 
       # Build rythm-svc-price docker image and push.
