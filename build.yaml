@@ -34,6 +34,9 @@ phases:
       # Build rythm-svc-price docker image and push.
       - cd ..
       - cd rythm-svc-socketio
+      - tsc
+      - npm run build
+      - cp .env ./build/
       - docker build -t rythm-svc-socketio .
       - docker tag rythm-svc-socketio:latest 778477161868.dkr.ecr.us-west-2.amazonaws.com/rythm-svc-socketio:latest
       - docker push 778477161868.dkr.ecr.us-west-2.amazonaws.com/rythm-svc-socketio:latest
