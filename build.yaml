@@ -15,9 +15,10 @@ phases:
       # Create repos in ECR.
       - npm install -g typescript
       - cd rythm-svc-cdk
-      # - cdk deploy "RythmSvcCdkStackEcrStack8BB0E4EE"
       - npm install
       - cdk list
+      - cdk deploy "RythmSvcCdkStackEcrStack8BB0E4EE"
+
       # - cd ..
       # Build docker image.
       # - cd rythm-price-micro-serv
