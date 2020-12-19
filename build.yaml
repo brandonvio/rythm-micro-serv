@@ -12,7 +12,7 @@ phases:
   build:
     commands:
       # Create repos in ECR.
-      - cd rythm-price-micro-serv-cdk
+      - cd rythm-svc-cdk
       - cdk deploy "RythmSvcCdkStackEcrStack8BB0E4EE"
       - cd ..
       # Build docker image.
