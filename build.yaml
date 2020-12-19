@@ -1,9 +1,10 @@
 version: 0.2
-# Build 2122
+# Build
 phases:
   pre_build:
     commands:
       - echo pre_build @1.
+      - echo 434
       - npm install -g typescript
       - npm install -g aws-cdk
       - aws --version
@@ -14,7 +15,7 @@ phases:
       # Create repos in ECR.
       - npm install -g typescript
       - cd rythm-svc-cdk
-      - cdk deploy "RythmSvcCdkStackEcrStack8BB0E4EE"
+      # - cdk deploy "RythmSvcCdkStackEcrStack8BB0E4EE"
       - cdk list
       # - cd ..
       # Build docker image.
