@@ -1,4 +1,4 @@
 git add .
 git stage .
-git commit -m "Development."
+git commit -m "Build refactor."
 git push

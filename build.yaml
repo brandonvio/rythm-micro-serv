@@ -11,23 +11,27 @@ phases:
       - docker --version
   build:
     commands:
-      # Build docker image.
-      - cd rythm-price-micro-serv
-      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 778477161868.dkr.ecr.us-west-2.amazonaws.com
-      - docker build -t rythm-price-micro-serv-repo .
-      - docker tag rythm-price-micro-serv-repo:latest 778477161868.dkr.ecr.us-west-2.amazonaws.com/rythm-price-micro-serv-repo:latest
-      # - docker push 778477161868.dkr.ecr.us-west-2.amazonaws.com/rythm-price-micro-serv-repo:latest
-      # Run the cdk.
-      - cd ..
+      # Create repos in ECR.
       - cd rythm-price-micro-serv-cdk
-      - npm install
-      - npm run build
-      - cdk synth "*"
-      - cdk deploy "*" --require-approval=never
+      - cdk deploy "RythmSvcCdkStackEcrStack8BB0E4EE"
       - cd ..
-      # Update the service.
-      - cd rythm-price-micro-serv
-      # - ./update_service.sh
+      # Build docker image.
+      # - cd rythm-price-micro-serv
+      # - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 778477161868.dkr.ecr.us-west-2.amazonaws.com
+      # - docker build -t rythm-price-micro-serv-repo .
+      # - docker tag rythm-price-micro-serv-repo:latest 778477161868.dkr.ecr.us-west-2.amazonaws.com/rythm-price-micro-serv-repo:latest
+      # # - docker push 778477161868.dkr.ecr.us-west-2.amazonaws.com/rythm-price-micro-serv-repo:latest
+      # # Run the cdk.
+      # - cd ..
+      # - cd rythm-price-micro-serv-cdk
+      # - npm install
+      # - npm run build
+      # - cdk synth "*"
+      # - cdk deploy "*" --require-approval=never
+      # - cd ..
+      # # Update the service.
+      # - cd rythm-price-micro-serv
+      # # - ./update_service.sh
   post_build:
     commands:
       - echo post_build
