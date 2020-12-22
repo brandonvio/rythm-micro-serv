@@ -22,6 +22,9 @@ phases:
       - cdk list
       - cdk synth --all
 
+      # Deploy core stack resources.
+      - cdk deploy "RythmSvcCdkStackCoreStackDC6ECDB4" --require-approval=never
+
       # Deploy repos.
       - cdk deploy "RythmSvcCdkStackEcrStack8BB0E4EE" --require-approval=never
 

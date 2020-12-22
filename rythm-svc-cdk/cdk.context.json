@@ -59,5 +59,12 @@
         ]
       }
     ]
-  }
+  },
+  "availability-zones:account=778477161868:region=us-west-2": [
+    "us-west-2a",
+    "us-west-2b",
+    "us-west-2c",
+    "us-west-2d"
+  ],
+  "ami:account=778477161868:filters.image-type.0=machine:filters.name.0=amzn-ami-vpc-nat-*:filters.state.0=available:owners.0=amazon:region=us-west-2": "ami-0a8fddfa5a937928e"
 }

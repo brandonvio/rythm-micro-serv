@@ -1,33 +1,32 @@
 import * as cdk from "@aws-cdk/core";
 import { EcrStack } from "./ecr-stack";
-import { EcsStack } from "./ecs-stack";
 import { PriceSvcStack } from "./price-svc-stack";
 import { SocketioSvcStack } from "./socketio-svc-stack";
+import { CoreStack } from "./core-stack";
 
 export class RythmSvcCdkStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props: cdk.StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
+    const coreStack = new CoreStack(this, "CoreStack", {
+      stackName: "rythm-core-stack",
+      env: props.env,
+    });
+
     const ecrStack = new EcrStack(this, "EcrStack", {
       stackName: "rythm-ecr-stack",
       env: props.env,
     });
 
-    const ecsStack = new EcsStack(this, "EcsStack", {
-      stackName: "rythm-ecs-stack",
-      env: props.env,
-    });
-
     const priceSvcStack = new PriceSvcStack(this, "PriceSvcStack", {
       stackName: "rythm-price-svc-stack",
-      cluster: ecsStack.cluster,
+      cluster: coreStack.cluster,
       env: props.env,
     });
 
     const socketioSvcStack = new SocketioSvcStack(this, "SocketioSvcStack", {
       stackName: "rythm-socketio-svc-stack",
-      cluster: ecsStack.cluster,
+      cluster: coreStack.cluster,
       env: props.env,
     });
   }
