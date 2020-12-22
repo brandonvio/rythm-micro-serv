@@ -27,6 +27,7 @@ export class RythmSvcCdkStack extends cdk.Stack {
     const socketioSvcStack = new SocketioSvcStack(this, "SocketioSvcStack", {
       stackName: "rythm-socketio-svc-stack",
       cluster: coreStack.cluster,
+      vpc: coreStack.vpc,
       env: props.env,
     });
   }

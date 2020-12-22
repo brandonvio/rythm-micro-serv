@@ -6,6 +6,7 @@ import * as iam from "@aws-cdk/aws-iam";
 
 interface SocketioSvcStackProps extends cdk.StackProps {
   cluster: ecs.Cluster;
+  vpc: ec2.Vpc;
 }
 
 export class SocketioSvcStack extends cdk.Stack {
@@ -13,10 +14,6 @@ export class SocketioSvcStack extends cdk.Stack {
     super(scope, id, props);
 
     const repo = ecr.Repository.fromRepositoryName(this, "SocketioSvcRepo", "rythm-svc-socketio");
-
-    const vpc = ec2.Vpc.fromLookup(this, "vpc", {
-      vpcId: "vpc-0f71af096d6ba9b0d",
-    });
 
     // Create the role to run Tasks.
     const role = new iam.Role(this, "SocketioTaskRole", {
@@ -56,14 +53,14 @@ export class SocketioSvcStack extends cdk.Stack {
 
     const securityGroup = new ec2.SecurityGroup(this, "SocketioSvcSecurityGroup", {
       securityGroupName: "rythm-socketio-svc-sg",
-      vpc: vpc,
+      vpc: props.vpc,
       allowAllOutbound: true,
     });
 
     securityGroup.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(3000), "socketio port opening");
 
     const service = new ecs.FargateService(this, "SocketioService", {
-      vpcSubnets: vpc.selectSubnets({ subnetType: ec2.SubnetType.PUBLIC }),
+      vpcSubnets: props.vpc.selectSubnets({ subnetType: ec2.SubnetType.PUBLIC }),
       serviceName: "rythm-socketio-service",
       cluster: props.cluster,
       taskDefinition: task,
