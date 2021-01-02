@@ -15,6 +15,16 @@ export class SocketioSvcStack extends cdk.Stack {
 
     const repo = ecr.Repository.fromRepositoryName(this, "SocketioSvcRepo", "rythm-svc-socketio");
 
+    const vpcx = ec2.Vpc.fromLookup(this, "RythmVpc", {
+      vpcId: "vpc-0577547410bb1fafb",
+    });
+
+    const x = ecs.Cluster.fromClusterAttributes(this, "id", {
+      vpc: vpcx,
+      clusterName: "rythm-cluster",
+      securityGroups: [],
+    });
+
     // Create the role to run Tasks.
     const role = new iam.Role(this, "SocketioTaskRole", {
       assumedBy: new iam.ServicePrincipal("ecs-tasks.amazonaws.com"),
@@ -68,5 +78,7 @@ export class SocketioSvcStack extends cdk.Stack {
       assignPublicIp: true,
       securityGroups: [securityGroup],
     });
+
+    // service.tas
   }
 }

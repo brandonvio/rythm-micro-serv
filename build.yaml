@@ -65,6 +65,9 @@ phases:
 
       # website
       - cdk deploy "RythmSvcCdkStackWebsiteStackE33FD23E" --require-approval=never
+      - cd ../rythm-svc-app
+      - npm run build
+      - aws s3 sync build s3://origin.rythm.cc --acl public-read
   post_build:
     commands:
       - echo post_build
