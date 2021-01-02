@@ -62,6 +62,9 @@ phases:
       - aws ecs update-service --desired-count 0 --cluster $ecs_cluster --service $ecs_service
       - aws ecs wait services-stable --cluster $ecs_cluster --services $ecs_service
       - aws ecs update-service --desired-count 1 --cluster $ecs_cluster --service $ecs_service --force-new-deployment
+
+      # website
+      - cdk deploy "RythmSvcCdkStackWebsiteStackE33FD23E" --require-approval=never
   post_build:
     commands:
       - echo post_build
