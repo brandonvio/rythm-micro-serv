@@ -31,5 +31,10 @@ export class RythmSvcCdkStack extends cdk.Stack {
       vpc: coreStack.vpc,
       env: props.env,
     });
+
+    const websiteStack = new WebsiteStack(this, "WebsiteStack", {
+      stackName: "rythm-website-stack",
+      env: props.env,
+    });
   }
 }

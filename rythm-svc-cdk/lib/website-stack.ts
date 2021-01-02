@@ -23,7 +23,7 @@ export class WebsiteStack extends cdk.Stack {
     //*****************************************************************************/
     // const reactBuildPath = path.resolve(__dirname, "../builds/react-app-build/build");
 
-    const reactAppBucket = new s3.Bucket(this, "websiteBucket", {
+    const reactAppBucket = new s3.Bucket(this, "reactAppBucket", {
       bucketName: "origin.rythm.cc",
       publicReadAccess: true,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
