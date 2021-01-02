@@ -1,31 +1,19 @@
 import requests
 import json
 import urllib.parse
-from kafka import KafkaProducer
 from src.EnvUtil import EnvUtil
+from src.KafkaUtil import KafkaUtil
 
 
-kafka_sasl_plain_username = EnvUtil.get_secret("confluent_sasl_plain_username")
-kafka_sasl_plain_password = EnvUtil.get_secret("confluent_sasl_plain_password")
-kafka_bootstrap_servers = EnvUtil.get_env("KAFKA_BOOTSTRAP_SERVERS")
-kafka_topic = EnvUtil.get_env("KAFKA_TOPIC")
 oanda_account_id = EnvUtil.get_secret("OANDA_DEFAULT_ACCOUNT")
 oanda_stream_domain = EnvUtil.get_env("OANDA_STREAM_DOMAIN")
 oanda_token = EnvUtil.get_secret("OANDA_TOKEN")
 oanda_instruments = urllib.parse.quote_plus(EnvUtil.get_env("INSTRUMENTS"))
 
-
-kafka_producer = KafkaProducer(
-    bootstrap_servers=[kafka_bootstrap_servers],
-    security_protocol="SASL_SSL",
-    sasl_mechanism="PLAIN",
-    sasl_plain_username=kafka_sasl_plain_username,
-    sasl_plain_password=kafka_sasl_plain_password,
-    value_serializer=lambda v: json.dumps(v).encode('utf-8')
-)
+k = KafkaUtil()
 
 
-def stream():
+def oanda_stream():
     headers = {"Authorization": f"Bearer {oanda_token}"}
     url = f"https://{oanda_stream_domain}/v3/accounts/{oanda_account_id}/pricing/stream?instruments={oanda_instruments}"
     price_stream = requests.get(url, stream=True, headers=headers)
@@ -39,8 +27,7 @@ def stream():
 
 def publish_price_to_kafka(line):
     price_dict = price_todict(line)
-    kafka_producer.send(kafka_topic, value=price_dict)
-    kafka_producer.flush()
+    k.kafka_send(line)
     print(price_dict["version"], price_dict["instrument"], price_dict["bid"], price_dict["ask"])
 
 

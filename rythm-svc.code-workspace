@@ -1,0 +1,23 @@
+{
+  "folders": [
+    {
+      "path": "rythm-svc-price"
+    },
+    {
+      "path": "rythm-svc-cdk"
+    },
+    {
+      "path": "rythm-svc-socketio"
+    },
+    {
+      "path": "rythm-svc-app"
+    },
+    {
+      "path": "docs"
+    }
+  ],
+  "settings": {
+    "git.ignoreLimitWarning": true,
+    "liveServer.settings.multiRootWorkspaceName": "rythm-svc-socketio"
+  }
+}

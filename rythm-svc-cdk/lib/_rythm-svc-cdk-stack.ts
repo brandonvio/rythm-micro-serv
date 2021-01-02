@@ -3,6 +3,7 @@ import { EcrStack } from "./ecr-stack";
 import { PriceSvcStack } from "./price-svc-stack";
 import { SocketioSvcStack } from "./socketio-svc-stack";
 import { CoreStack } from "./core-stack";
+import { WebsiteStack } from "./website-stack";
 
 export class RythmSvcCdkStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props: cdk.StackProps) {
